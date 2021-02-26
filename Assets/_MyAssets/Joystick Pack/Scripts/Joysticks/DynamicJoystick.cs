@@ -9,10 +9,10 @@ public class DynamicJoystick : Joystick
 
     [SerializeField] private float moveThreshold = 1;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
         MoveThreshold = moveThreshold;
-        base.Start();
+        base.OnEnable();
         background.gameObject.SetActive(false);
     }
 

@@ -40,7 +40,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     private Vector2 input = Vector2.zero;
 
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
         HandleRange = handleRange;
         DeadZone = deadZone;

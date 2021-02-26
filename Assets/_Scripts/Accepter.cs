@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Accepter : MonoBehaviour
 {
-    [SerializeField]
-    Transform[] targetsFree;
+    [SerializeField] Transform[] targetsFree;
 
     int lastID;
     void Start()
@@ -14,7 +13,9 @@ public class Accepter : MonoBehaviour
     }
     public Transform target()
     {
+        Debug.Log(gameObject.name);
         lastID++;
         return targetsFree[lastID-1];
+        
     }
 }

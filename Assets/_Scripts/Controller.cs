@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,27 +8,30 @@ public class Controller : MonoBehaviour
 
     Joystick joystick;
 
-    [SerializeField]
-    Camera camera;
+    [SerializeField] Camera camera;
 
-    [SerializeField]
-    GameObject antenaObject,antenaEffect,PS;
+    [SerializeField] GameObject antenaObject,antenaEffect,PS;
 
-    [SerializeField]
-    Animator playersModel, antena;
+    [SerializeField] Animator playersModel, antena;
 
     Rigidbody playerController;
 
-    [SerializeField]
-    float moveForce, moveCameraSpeed, rotationSpeed;
+    [SerializeField] float moveForce, moveCameraSpeed, rotationSpeed;
 
-    void Start()
+    void OnEnable()
     {
+        gameObject.transform.position = new Vector3(0, 0, 0);
         camera.orthographicSize = 20;
         playerController = GetComponent<Rigidbody>();
         joystick = FindObjectOfType<Joystick>();
     }
-  
+
+    private void OnDisable()
+    {
+        antena.SetBool("status", false);
+        playersModel.SetBool("isMove", false);
+    }
+
     void FixedUpdate()
     {
         if (camera.orthographicSize > 8.5)
@@ -45,7 +49,7 @@ public class Controller : MonoBehaviour
         else
         {
             if (playersModel.GetBool("isMove"))
-            playersModel.SetBool("isMove", false);
+                playersModel.SetBool("isMove", false);
         }
         FollowingCamera();
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +32,7 @@ public class Campaign : MonoBehaviour
         timer = 2f;
         statusChecked = false;
         paramentrs = GameObject.FindGameObjectWithTag("Level Manager").GetComponent<Paramentrs>();
-        accepter = GameObject.FindGameObjectWithTag("Level").GetComponent<Accepter>();
+        accepter = gameObject.GetComponentInParent<Accepter>();
         paramentrs.NeedCountInit(amount);
         
     }

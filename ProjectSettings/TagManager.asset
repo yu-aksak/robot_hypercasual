@@ -11,6 +11,7 @@ TagManager:
   - Bridge
   - Level Manager
   - Level
+  - UIManager
   layers:
   - Default
   - TransparentFX

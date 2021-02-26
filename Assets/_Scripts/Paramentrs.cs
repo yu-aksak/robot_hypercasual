@@ -5,24 +5,29 @@ using UnityEngine.UI;
 
 public class Paramentrs : MonoBehaviour
 {
-    int resultCount,needCount,crypta;
+    int resultCount;
+    public static int needCount;
+    int crypta;
 
     GameObject[] bridges;
 
-    [SerializeField]
-    UIManager uiManager;
+    [SerializeField] UIManager uiManager;
 
-    [SerializeField]
-    Text levelCounterInfo;
+    [SerializeField] Text levelCounterInfo;
 
-    [SerializeField]
-    bool withoutBridges;
+    [SerializeField] bool withoutBridges;
 
     void Start()
+    {
+        Init();
+    }
+
+    void Init()
     {
         crypta = 0;
         withoutBridges = false;
         resultCount = 0;
+        needCount = 0;
         BridgesInit();
         if (bridges.Length == 0)
         {
@@ -58,6 +63,7 @@ public class Paramentrs : MonoBehaviour
 
     void MissionCompleted()
     {
+        Init();
         uiManager.CompleteInit();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().enabled = false;
     }
