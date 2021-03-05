@@ -18,10 +18,9 @@ public class UIManager : MonoBehaviour
     }
     public void Quit()
     {
-        joystick.SetActive(false);
-        gameCanvas.SetActive(false);
-        missionCanvas.SetActive(true);
-        controller.SetActive(false);
+        GameObject level = GameObject.FindGameObjectWithTag("Level");
+        Destroy(level);
+        SetCanvas();
     }
     public void NextLevel()
     {
@@ -45,7 +44,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            Quit();
+            SetCanvas();
         }
     }
 
@@ -60,6 +59,14 @@ public class UIManager : MonoBehaviour
         joystick.SetActive(false);
     }
 
+    private void SetCanvas()
+    {
+        joystick.SetActive(false);
+        gameCanvas.SetActive(false);
+        missionCanvas.SetActive(true);
+        controller.SetActive(false);
+    }
+    
     public void Win()
     {
         winWindow.SetActive(true);
