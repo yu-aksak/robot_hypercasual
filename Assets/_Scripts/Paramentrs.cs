@@ -43,7 +43,6 @@ public class Paramentrs : MonoBehaviour
     public void NeedCountInit(int amount)
     {
         needCount = needCount + amount;
-        Debug.Log(needCount);    
         TextRefresher();
     }
 
@@ -66,12 +65,16 @@ public class Paramentrs : MonoBehaviour
     {
         resultCount = 0;
         needCount = 0;
+        uiManager.Win();
         uiManager.CompleteInit();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().enabled = false;
     }
 
     public void MissionFailed()
     {
+        resultCount = 0;
+        needCount = 0;
+        uiManager.Lose();
         uiManager.CompleteInit();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().AnimationDisabler();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().enabled = false;

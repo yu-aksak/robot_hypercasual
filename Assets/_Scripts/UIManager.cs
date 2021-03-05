@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject levelText, conditionsText, joystick,blur,
+    [SerializeField] private GameObject levelText, conditionsText, joystick,winWindow, loseWindow,
         controller, missionCanvas, gameCanvas;
     
     [SerializeField] private Text cryptaInfoText, timerText;
@@ -18,7 +18,10 @@ public class UIManager : MonoBehaviour
     }
     public void Quit()
     {
-        Application.Quit();
+        joystick.SetActive(false);
+        gameCanvas.SetActive(false);
+        missionCanvas.SetActive(true);
+        controller.SetActive(false);
     }
     public void NextLevel()
     {
@@ -26,28 +29,50 @@ public class UIManager : MonoBehaviour
         GameObject level = GameObject.FindGameObjectWithTag("Level");
         Destroy(level);
         InitLevel(0, maxLevel);
-        StartMission();
     }
 
     public void InitLevel(int typeLevel, int level)
     {
         GameObject levelManager = GameObject.FindGameObjectWithTag("Level Manager");
-        levelManager.GetComponent<LevelGeneration>().Generate(typeLevel, level);
-        levelManager.GetComponent<Paramentrs>().Init();
+        if (levelManager.GetComponent<LevelGeneration>().Generate(typeLevel, level))
+        {
+            levelManager.GetComponent<Paramentrs>().Init();
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            maxLevel = level;
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            LevelInfoTextRefresh(level);
+            StartMission();
+        }
+        else
+        {
+            Quit();
+        }
+    }
+
+    public void Restart()
+    {
         
     }
     public void CompleteInit()
     {
-        blur.SetActive(true);
         levelText.SetActive(false);
         conditionsText.SetActive(false);
         joystick.SetActive(false);
-        controller.SetActive(false);
     }
 
+    public void Win()
+    {
+        winWindow.SetActive(true);
+    }
+    
+    public void Lose()
+    {
+        loseWindow.SetActive(true);
+    }
+    
     public void StartMission()
     {
-        blur.SetActive(false);
+        winWindow.SetActive(false);
         levelText.SetActive(true);
         conditionsText.SetActive(true);
         joystick.SetActive(true);
@@ -61,5 +86,9 @@ public class UIManager : MonoBehaviour
     public void CryptaInfoTextRefresh(int amount)
     {
         cryptaInfoText.text = "" + amount;
+    }
+    public void LevelInfoTextRefresh(int level)
+    {
+        levelText.GetComponent<Text>().text = "LVL: " + level;
     }
 }

@@ -18,11 +18,10 @@ public class Crypta : MonoBehaviour
         if (other.tag == "Player")
         {
             psPickUp.SetActive(true);
-            psPickUp.transform.SetParent(null);
+            psPickUp.transform.SetParent(transform.parent);
             Destroy(gameObject);
         }
-        GameObject.FindGameObjectWithTag("Level Manager").GetComponent<Paramentrs>().
-            TransferCrypta(1);
+        GameObject.FindGameObjectWithTag("Level Manager").GetComponent<Paramentrs>().TransferCrypta(1);
     }
     void Update()
     {
