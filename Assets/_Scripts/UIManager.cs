@@ -80,6 +80,7 @@ public class UIManager : MonoBehaviour
     public void StartMission()
     {
         winWindow.SetActive(false);
+        loseWindow.SetActive(false);
         levelText.SetActive(true);
         conditionsText.SetActive(true);
         joystick.SetActive(true);

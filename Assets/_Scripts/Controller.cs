@@ -24,6 +24,8 @@ public class Controller : MonoBehaviour
         camera.orthographicSize = 20;
         playerController = GetComponent<Rigidbody>();
         joystick = FindObjectOfType<Joystick>();
+        joystick.Horizontal = 0;
+        joystick.Vertical = 0;
     }
 
     private void OnDisable()

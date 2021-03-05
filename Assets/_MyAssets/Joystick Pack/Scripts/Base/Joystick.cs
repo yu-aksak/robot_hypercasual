@@ -8,13 +8,13 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public float Horizontal
     {
         get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; }
-        set => throw new System.NotImplementedException();
+        set => input.x = 0;
     }
 
     public float Vertical
     {
         get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; }
-        set => throw new System.NotImplementedException();
+        set => input.y = 0;
     }
 
     public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
