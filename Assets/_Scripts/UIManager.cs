@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelText, conditionsText, joystick,blur,
-        controller, levelPanel;
+        controller, missionCanvas, gameCanvas;
     
     [SerializeField] private Text cryptaInfoText, timerText;
     private int maxLevel = 1;
@@ -23,20 +23,26 @@ public class UIManager : MonoBehaviour
     public void NextLevel()
     {
         maxLevel++;
-        GameObject levelManager = GameObject.FindGameObjectWithTag("Level Manager");
         GameObject level = GameObject.FindGameObjectWithTag("Level");
         Destroy(level);
-        levelManager.GetComponent<LevelGeneration>().Generate(0, maxLevel);
+        InitLevel(0, maxLevel);
         StartMission();
     }
 
+    public void InitLevel(int typeLevel, int level)
+    {
+        GameObject levelManager = GameObject.FindGameObjectWithTag("Level Manager");
+        levelManager.GetComponent<LevelGeneration>().Generate(typeLevel, level);
+        levelManager.GetComponent<Paramentrs>().Init();
+        
+    }
     public void CompleteInit()
     {
         blur.SetActive(true);
         levelText.SetActive(false);
         conditionsText.SetActive(false);
         joystick.SetActive(false);
-        //controller.SetActive(false);
+        controller.SetActive(false);
     }
 
     public void StartMission()
@@ -45,8 +51,10 @@ public class UIManager : MonoBehaviour
         levelText.SetActive(true);
         conditionsText.SetActive(true);
         joystick.SetActive(true);
+        gameCanvas.SetActive(true);
+        missionCanvas.SetActive(false);
+        controller.SetActive(true);
         controller.GetComponent<Controller>().enabled = true;
-        //controller.SetActive(true);
         //controller.transform.position = new Vector3(0, 0.15f, 0);
     }
 

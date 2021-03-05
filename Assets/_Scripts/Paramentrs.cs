@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class Paramentrs : MonoBehaviour
@@ -20,14 +22,12 @@ public class Paramentrs : MonoBehaviour
     void Start()
     {
         Init();
+        crypta = 0;
     }
 
-    void Init()
+    public void Init()
     {
-        crypta = 0;
         withoutBridges = false;
-        resultCount = 0;
-        needCount = 0;
         BridgesInit();
         if (bridges.Length == 0)
         {
@@ -43,6 +43,7 @@ public class Paramentrs : MonoBehaviour
     public void NeedCountInit(int amount)
     {
         needCount = needCount + amount;
+        Debug.Log(needCount);    
         TextRefresher();
     }
 
@@ -63,7 +64,8 @@ public class Paramentrs : MonoBehaviour
 
     void MissionCompleted()
     {
-        Init();
+        resultCount = 0;
+        needCount = 0;
         uiManager.CompleteInit();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().enabled = false;
     }
@@ -94,4 +96,5 @@ public class Paramentrs : MonoBehaviour
         crypta++;
         uiManager.CryptaInfoTextRefresh(crypta);
     }
+
 }

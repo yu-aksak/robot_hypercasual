@@ -13,7 +13,6 @@ public class Accepter : MonoBehaviour
     }
     public Transform target()
     {
-        Debug.Log(gameObject.name);
         lastID++;
         return targetsFree[lastID-1];
         

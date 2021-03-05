@@ -29,7 +29,7 @@ public class Bridge : MonoBehaviour
         {
             beforeBridge.SetActive(false);
             afterBridge.SetActive(true);
-            afterBridge.transform.SetParent(null);
+            afterBridge.transform.SetParent(transform.parent, true);
             Destroy(gameObject);
         }
         else

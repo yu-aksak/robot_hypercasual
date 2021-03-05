@@ -34,7 +34,6 @@ public class Campaign : MonoBehaviour
         paramentrs = GameObject.FindGameObjectWithTag("Level Manager").GetComponent<Paramentrs>();
         accepter = gameObject.GetComponentInParent<Accepter>();
         paramentrs.NeedCountInit(amount);
-        
     }
 
     void OnTriggerExit(Collider other)

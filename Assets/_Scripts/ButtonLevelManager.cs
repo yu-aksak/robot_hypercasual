@@ -17,14 +17,14 @@ public class ButtonLevelManager : MonoBehaviour
         level = int.Parse(gameObject.GetComponent<Button>().GetComponentInChildren<TextMeshProUGUI>().text);
 
         _levelGeneration = GameObject.FindGameObjectWithTag("Level Manager").GetComponent<LevelGeneration>();
-        //_uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+        _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         
         gameObject.GetComponent<Button>().onClick.AddListener(ButtonClick);
     }
 
     private void ButtonClick()
-    {
-        _levelGeneration.Generate(0, level);
-        Paramentrs.needCount = level;
+    { 
+        _uiManager.InitLevel(0, level);
+        _uiManager.StartMission();
     }
 }

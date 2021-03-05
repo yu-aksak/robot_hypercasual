@@ -20,7 +20,7 @@ public class Controller : MonoBehaviour
 
     void OnEnable()
     {
-        gameObject.transform.position = new Vector3(0, 0, 0);
+        gameObject.transform.position = new Vector3(0, 1, 0);
         camera.orthographicSize = 20;
         playerController = GetComponent<Rigidbody>();
         joystick = FindObjectOfType<Joystick>();
@@ -40,8 +40,7 @@ public class Controller : MonoBehaviour
         }
         Vector3 moveToTarger= new Vector3(joystick.Horizontal * moveForce * Time.deltaTime, playerController.velocity.y, joystick.Vertical * moveForce * Time.deltaTime);
         playerController.velocity = moveToTarger;
-
-        if (joystick.Horizontal!=0|| joystick.Vertical != 0)
+        if (joystick.Horizontal != 0 || joystick.Vertical != 0)
         {
             playersModel.SetBool("isMove", true);
             RotateTowardMovementVector(moveToTarger);

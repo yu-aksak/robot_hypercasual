@@ -160,7 +160,8 @@ MonoBehaviour:
   joystick: {fileID: 967319122}
   blur: {fileID: 1811545529}
   controller: {fileID: 1049952056}
-  levelPanel: {fileID: 0}
+  missionCanvas: {fileID: 1103718432}
+  gameCanvas: {fileID: 1201600272}
   cryptaInfoText: {fileID: 1184304995}
   timerText: {fileID: 0}
 --- !u!114 &40615710
@@ -459,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &390768016
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3050,7 +3051,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1201600273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4266,7 +4267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1886939086
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4557,6 +4558,10 @@ PrefabInstance:
     - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_Name
       value: Fixed Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2929252283123773939, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: handle
