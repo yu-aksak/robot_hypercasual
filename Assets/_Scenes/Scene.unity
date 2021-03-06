@@ -163,8 +163,10 @@ MonoBehaviour:
   controller: {fileID: 1049952056}
   missionCanvas: {fileID: 1103718432}
   gameCanvas: {fileID: 1201600272}
+  levelButtons: []
   cryptaInfoText: {fileID: 1184304995}
   timerText: {fileID: 0}
+  currentLevel: 1
 --- !u!114 &40615710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,7 +1003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.00012207031}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -100, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433550907
@@ -2442,7 +2444,7 @@ GameObject:
   - component: {fileID: 914640281}
   m_Layer: 5
   m_Name: Level (4)
-  m_TagString: Untagged
+  m_TagString: Level Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2561,9 +2563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116e9d08194ab644cba042d69951a2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: 0
   level: 0
-  conditions: 0
   status: unavailable
 --- !u!1 &916060783
 GameObject:
@@ -3376,7 +3376,7 @@ GameObject:
   - component: {fileID: 1120164141}
   m_Layer: 5
   m_Name: Level (2)
-  m_TagString: Untagged
+  m_TagString: Level Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3495,9 +3495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116e9d08194ab644cba042d69951a2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: 0
   level: 0
-  conditions: 0
   status: unavailable
 --- !u!1 &1184304994
 GameObject:
@@ -4369,7 +4367,7 @@ GameObject:
   - component: {fileID: 1780694787}
   m_Layer: 5
   m_Name: Level (3)
-  m_TagString: Untagged
+  m_TagString: Level Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4488,9 +4486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116e9d08194ab644cba042d69951a2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: 0
   level: 0
-  conditions: 0
   status: unavailable
 --- !u!1 &1797690948
 GameObject:
@@ -5303,7 +5299,7 @@ GameObject:
   - component: {fileID: 1936659940}
   m_Layer: 5
   m_Name: Level (5)
-  m_TagString: Untagged
+  m_TagString: Level Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5422,9 +5418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116e9d08194ab644cba042d69951a2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: 0
   level: 0
-  conditions: 0
   status: unavailable
 --- !u!1001 &1963774736
 PrefabInstance:
@@ -5846,7 +5840,7 @@ GameObject:
   - component: {fileID: 2122860922}
   m_Layer: 5
   m_Name: Level (1)
-  m_TagString: Untagged
+  m_TagString: Level Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5965,7 +5959,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116e9d08194ab644cba042d69951a2e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentConditions: 0
   level: 0
-  conditions: 0
   status: active

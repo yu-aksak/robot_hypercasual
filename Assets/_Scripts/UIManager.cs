@@ -10,13 +10,16 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelText, conditionsText, joystick,winWindow, loseWindow,
         controller, missionCanvas, gameCanvas;
+
+    public GameObject[] levelButtons;
     
     [SerializeField] private Text cryptaInfoText, timerText;
-    private int maxLevel = 1;
-    private int currentLevel = 1;
+    public int currentLevel = 1;
     private void Start()
     {
+        levelButtons = GameObject.FindGameObjectsWithTag("Level Button");
         CryptaInfoTextRefresh(0);
+        
     }
     public void ToMenu()
     {
@@ -26,21 +29,24 @@ public class UIManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        maxLevel++;
-        GameObject level = GameObject.FindGameObjectWithTag("Level");
-        Destroy(level);
-        InitLevel(0, maxLevel);
+        currentLevel++;
+        LoadLevel();
     }
 
+    public void LoadLevel()
+    {
+        GameObject level = GameObject.FindGameObjectWithTag("Level");
+        Destroy(level);
+        InitLevel(0, currentLevel);
+    }
+    
     public void InitLevel(int typeLevel, int level)
     {
         GameObject levelManager = GameObject.FindGameObjectWithTag("Level Manager");
         if (levelManager.GetComponent<LevelGeneration>().Generate(typeLevel, level))
         {
             levelManager.GetComponent<Paramentrs>().Init();
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            maxLevel = level;
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            currentLevel = level;
             LevelInfoTextRefresh(level);
             StartMission();
         }
@@ -61,9 +67,7 @@ public class UIManager : MonoBehaviour
     
     public void Restart()
     {
-        GameObject level = GameObject.FindGameObjectWithTag("Level");
-        Destroy(level);
-        InitLevel(0, maxLevel);
+        LoadLevel();
     }
     public void CompleteInit()
     {
@@ -82,6 +86,15 @@ public class UIManager : MonoBehaviour
     
     public void Win()
     {
+        if (!levelButtons[currentLevel - 1].GetComponent<ButtonLevelManager>().Status.Equals("passed"))
+        {
+            if (currentLevel < levelButtons.Length)
+            {
+                levelButtons[currentLevel].GetComponent<ButtonLevelManager>().Status = "active";
+                levelButtons[currentLevel].GetComponent<ButtonLevelManager>().SetInteractable(true);
+            }
+            levelButtons[currentLevel - 1].GetComponent<ButtonLevelManager>().Status = "passed";
+        }
         winWindow.SetActive(true);
     }
     

@@ -12,6 +12,7 @@ TagManager:
   - Level Manager
   - Level
   - UIManager
+  - Level Button
   layers:
   - Default
   - TransparentFX

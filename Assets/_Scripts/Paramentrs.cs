@@ -35,6 +35,12 @@ public class Paramentrs : MonoBehaviour
         }
     }
 
+    public void SetZero()
+    {
+        resultCount = 0;
+        needCount = 0;
+    }
+    
     public int needCountOnLevel()
     {
         return resultCount;
@@ -54,7 +60,6 @@ public class Paramentrs : MonoBehaviour
         {
             BridgesInit();
         }
-
         if (resultCount >= needCount)
         {
             MissionCompleted();
@@ -63,8 +68,6 @@ public class Paramentrs : MonoBehaviour
 
     void MissionCompleted()
     {
-        resultCount = 0;
-        needCount = 0;
         uiManager.Win();
         uiManager.CompleteInit();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().enabled = false;
@@ -72,8 +75,6 @@ public class Paramentrs : MonoBehaviour
 
     public void MissionFailed()
     {
-        resultCount = 0;
-        needCount = 0;
         uiManager.Lose();
         uiManager.CompleteInit();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().AnimationDisabler();

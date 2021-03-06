@@ -8,6 +8,7 @@ public class LevelGeneration : MonoBehaviour
     
     public bool Generate(int typeLevel, int level)
     {
+        GameObject.FindWithTag("Level Manager").GetComponent<Paramentrs>().SetZero();
         if (level <= _levelsDatas[typeLevel].prefabsLevels.Count)
         {
             GameObject _level = Instantiate(_levelsDatas[typeLevel].prefabsLevels[level - 1], new Vector3(0, 0, 0),
