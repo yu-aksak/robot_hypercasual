@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     {
         CryptaInfoTextRefresh(0);
     }
-    public void Quit()
+    public void ToMenu()
     {
         GameObject level = GameObject.FindGameObjectWithTag("Level");
         Destroy(level);
@@ -48,6 +48,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+    
     public void Restart()
     {
         

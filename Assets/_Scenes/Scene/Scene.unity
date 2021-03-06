@@ -3966,7 +3966,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 950342933}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: ToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
