@@ -11,12 +11,12 @@ public class ButtonLevelManager : MonoBehaviour
     public int conditions;
     public string status;
     private UIManager _uiManager;
-    private LevelGeneration _levelGeneration;
+    //private LevelGeneration _levelGeneration;
     private void Start()
     {
         level = int.Parse(gameObject.GetComponent<Button>().GetComponentInChildren<TextMeshProUGUI>().text);
 
-        _levelGeneration = GameObject.FindGameObjectWithTag("Level Manager").GetComponent<LevelGeneration>();
+        //_levelGeneration = GameObject.FindGameObjectWithTag("Level Manager").GetComponent<LevelGeneration>();
         _uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         
         gameObject.GetComponent<Button>().onClick.AddListener(ButtonClick);

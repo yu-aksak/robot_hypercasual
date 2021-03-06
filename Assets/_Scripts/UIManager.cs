@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] private Text cryptaInfoText, timerText;
     private int maxLevel = 1;
+    private int currentLevel = 1;
     private void Start()
     {
         CryptaInfoTextRefresh(0);
@@ -48,6 +50,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+    }
+
     public void Quit()
     {
         Application.Quit();
@@ -55,7 +61,9 @@ public class UIManager : MonoBehaviour
     
     public void Restart()
     {
-        
+        GameObject level = GameObject.FindGameObjectWithTag("Level");
+        Destroy(level);
+        InitLevel(0, maxLevel);
     }
     public void CompleteInit()
     {
