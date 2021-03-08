@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class ButtonLevelManager : MonoBehaviour
     //private LevelGeneration _levelGeneration;
     private void Start()
     {
-        level = int.Parse(gameObject.GetComponent<Button>().GetComponentInChildren<TextMeshProUGUI>().text);
+        //level = int.Parse(gameObject.GetComponent<Button>().GetComponentInChildren<TextMeshProUGUI>().text);
         if (status.Equals("unavailable"))
             SetInteractable(false);
         else
@@ -39,4 +40,10 @@ public class ButtonLevelManager : MonoBehaviour
     {
         gameObject.GetComponent<Button>().interactable = temp;
     }
+
+    public String GetName()
+    {
+        return gameObject.name;
+    }
+    
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,13 +12,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject levelText, conditionsText, joystick,winWindow, loseWindow,
         controller, missionCanvas, gameCanvas;
 
-    public GameObject[] levelButtons;
-    
+    public GameObject levelsContent;
+    public ButtonLevelManager[] levelButtons;
+
     [SerializeField] private Text cryptaInfoText, timerText;
     public int currentLevel = 1;
     private void Start()
     {
-        levelButtons = GameObject.FindGameObjectsWithTag("Level Button");
+        levelButtons = levelsContent.GetComponentsInChildren<ButtonLevelManager>();
         CryptaInfoTextRefresh(0);
         
     }
@@ -86,14 +88,15 @@ public class UIManager : MonoBehaviour
     
     public void Win()
     {
-        if (!levelButtons[currentLevel - 1].GetComponent<ButtonLevelManager>().Status.Equals("passed"))
+        
+        if (!levelButtons[currentLevel - 1].Status.Equals("passed"))
         {
             if (currentLevel < levelButtons.Length)
             {
-                levelButtons[currentLevel].GetComponent<ButtonLevelManager>().Status = "active";
-                levelButtons[currentLevel].GetComponent<ButtonLevelManager>().SetInteractable(true);
+                levelButtons[currentLevel].Status = "active";
+                levelButtons[currentLevel].SetInteractable(true);
             }
-            levelButtons[currentLevel - 1].GetComponent<ButtonLevelManager>().Status = "passed";
+            levelButtons[currentLevel - 1].Status = "passed";
         }
         winWindow.SetActive(true);
     }
