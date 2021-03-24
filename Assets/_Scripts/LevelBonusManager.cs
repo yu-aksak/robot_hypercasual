@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelBonusManager : MonoBehaviour
 {
-
+    //private float timer = 26.0f;
     public Transform[] targetPoint;
 
+    //[SerializeField] private Text timeText;
     [SerializeField]
     GameObject crypta, cryptaPackage;
     void Start()
@@ -17,6 +19,15 @@ public class LevelBonusManager : MonoBehaviour
             SpawnerInit(i);
         }
     }
+
+    /*private void Update()
+    {
+        if (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+            timeText.text = "" + (int) timer;
+        }
+    }*/
 
     void SpawnerInit(int i)
     {

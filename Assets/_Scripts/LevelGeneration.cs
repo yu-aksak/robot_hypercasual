@@ -5,7 +5,6 @@ using UnityEngine;
 public class LevelGeneration : MonoBehaviour
 {
     [SerializeField] private List<LevelsData> _levelsDatas = new List<LevelsData>();
-    
     public bool Generate(int typeLevel, int level)
     {
         GameObject.FindWithTag("Level Manager").GetComponent<Paramentrs>().SetZero();

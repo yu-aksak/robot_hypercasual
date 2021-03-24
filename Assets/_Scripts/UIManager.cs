@@ -10,36 +10,51 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject levelText, conditionsText, joystick,winWindow, loseWindow,
-        controller, missionCanvas, gameCanvas;
+        controller, missionCanvas, gameCanvas, bonusLevelButton, timerText, bonusWindow, shopCanvas;
 
-    public GameObject levelsContent;
-    public ButtonLevelManager[] levelButtons;
+    [SerializeField] private GameObject levelsContent;
+    
+    private ButtonLevelManager[] levelButtons;
 
-    [SerializeField] private Text cryptaInfoText, timerText;
-    public int currentLevel = 1;
+    [SerializeField] private Text cryptaInfoText;
+    private int currentLevel = 1;
+    private int bonusLevel = 1;
+    public int crypta = 0;
     private void Start()
     {
         levelButtons = levelsContent.GetComponentsInChildren<ButtonLevelManager>();
-        CryptaInfoTextRefresh(0);
+        CryptaInfoTextRefresh(Crypta);
         
     }
+
+    public void ToMenuFromShop(bool tmp)
+    {
+        shopCanvas.SetActive(tmp);
+        missionCanvas.SetActive(!tmp);
+    }
+
     public void ToMenu()
     {
         GameObject level = GameObject.FindGameObjectWithTag("Level");
+        if(level == null) 
+            level = GameObject.FindGameObjectWithTag("LevelBonusManager");
         Destroy(level);
         SetCanvas();
     }
     public void NextLevel()
     {
         currentLevel++;
-        LoadLevel();
+        bonusLevelButton.SetActive(false);
+        LoadLevel(0, currentLevel);
     }
 
-    public void LoadLevel()
+    public void LoadLevel(int typeLevel, int numberLevel)
     {
         GameObject level = GameObject.FindGameObjectWithTag("Level");
+        if(level == null) 
+            level = GameObject.FindGameObjectWithTag("LevelBonusManager");
         Destroy(level);
-        InitLevel(0, currentLevel);
+        InitLevel(typeLevel, numberLevel);
     }
     
     public void InitLevel(int typeLevel, int level)
@@ -48,7 +63,8 @@ public class UIManager : MonoBehaviour
         if (levelManager.GetComponent<LevelGeneration>().Generate(typeLevel, level))
         {
             levelManager.GetComponent<Paramentrs>().Init();
-            currentLevel = level;
+            if(typeLevel != 1)
+                currentLevel = level;
             LevelInfoTextRefresh(level);
             StartMission();
         }
@@ -62,6 +78,21 @@ public class UIManager : MonoBehaviour
     {
     }
 
+    public void StartBonusLevel()
+    {
+        LoadLevel(1, bonusLevel);
+        timerText.SetActive(true);
+        GameObject levelManager = GameObject.FindGameObjectWithTag("Level Manager");
+        levelManager.GetComponent<Paramentrs>().BonusLevel();
+    }
+
+    public void BonusStop(int crypta)
+    {
+        Crypta += crypta;
+        bonusWindow.SetActive(true);
+        timerText.SetActive(false);
+    }
+    
     public void Quit()
     {
         Application.Quit();
@@ -69,7 +100,7 @@ public class UIManager : MonoBehaviour
     
     public void Restart()
     {
-        LoadLevel();
+        LoadLevel(0, currentLevel);
     }
     public void CompleteInit()
     {
@@ -80,25 +111,40 @@ public class UIManager : MonoBehaviour
 
     private void SetCanvas()
     {
+        winWindow.SetActive(false);
+        loseWindow.SetActive(false);
+        bonusWindow.SetActive(false);
         joystick.SetActive(false);
         gameCanvas.SetActive(false);
         missionCanvas.SetActive(true);
         controller.SetActive(false);
     }
     
-    public void Win()
+    public void Win(int crypta)
     {
-        
-        if (!levelButtons[currentLevel - 1].Status.Equals("passed"))
+        if (!loseWindow.activeInHierarchy)
         {
-            if (currentLevel < levelButtons.Length)
+            if (!levelButtons[currentLevel - 1].Status.Equals("passed"))
             {
-                levelButtons[currentLevel].Status = "active";
-                levelButtons[currentLevel].SetInteractable(true);
+
+                if (currentLevel % 3 == 0)
+                {
+                    //bonusLevel++;
+                    bonusLevelButton.SetActive(true);
+                }
+
+                if (currentLevel < levelButtons.Length)
+                {
+                    levelButtons[currentLevel].Status = "active";
+                    levelButtons[currentLevel].SetInteractable(true);
+                }
+
+                levelButtons[currentLevel - 1].Status = "passed";
             }
-            levelButtons[currentLevel - 1].Status = "passed";
+
+            Crypta += crypta;
+            winWindow.SetActive(true);
         }
-        winWindow.SetActive(true);
     }
     
     public void Lose()
@@ -109,6 +155,7 @@ public class UIManager : MonoBehaviour
     public void StartMission()
     {
         winWindow.SetActive(false);
+        bonusWindow.SetActive(false);
         loseWindow.SetActive(false);
         levelText.SetActive(true);
         conditionsText.SetActive(true);
@@ -118,6 +165,12 @@ public class UIManager : MonoBehaviour
         controller.SetActive(true);
         controller.GetComponent<Controller>().enabled = true;
         //controller.transform.position = new Vector3(0, 0.15f, 0);
+    }
+
+    public int Crypta
+    {
+        get => crypta;
+        set => crypta = value;
     }
 
     public void CryptaInfoTextRefresh(int amount)

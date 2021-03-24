@@ -19,10 +19,12 @@ public class Paramentrs : MonoBehaviour
 
     [SerializeField] bool withoutBridges;
 
+    private float timer = 26.0f;
+    [SerializeField] private Text timeText;
+
     void Start()
     {
         Init();
-        crypta = 0;
     }
 
     public void Init()
@@ -37,6 +39,8 @@ public class Paramentrs : MonoBehaviour
 
     public void SetZero()
     {
+        crypta = 0;
+        uiManager.CryptaInfoTextRefresh(crypta);
         resultCount = 0;
         needCount = 0;
     }
@@ -68,7 +72,7 @@ public class Paramentrs : MonoBehaviour
 
     void MissionCompleted()
     {
-        uiManager.Win();
+        uiManager.Win(crypta);
         uiManager.CompleteInit();
         GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().enabled = false;
     }
@@ -100,5 +104,27 @@ public class Paramentrs : MonoBehaviour
         crypta++;
         uiManager.CryptaInfoTextRefresh(crypta);
     }
-
+    public void BonusLevel()
+    {
+        StartCoroutine(Timer());
+    }
+    
+    IEnumerator Timer()
+    {
+        for(;;)
+            if (timer > 0)
+            {
+                timer -= 1;
+                timeText.text = "" + (int) timer;
+                yield return new WaitForSeconds(1.0f);
+            }
+            else
+            {
+                timer = 26;
+                uiManager.BonusStop(crypta);
+                uiManager.CompleteInit();
+                GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>().enabled = false;
+                break;
+            }
+    }
 }

@@ -17,6 +17,7 @@ public class SkinManager : MonoBehaviour
     public List<Skin> skins;
 
     [SerializeField] Renderer robotSkin;
+    [SerializeField] Renderer playerSkin;
 
     [SerializeField] GameObject robotPreview, butRotateL, butRotateR;
 
@@ -28,26 +29,23 @@ public class SkinManager : MonoBehaviour
 
     int money; //from another script Paraments.cs
 
-    void Start()
+    int lastID;
+    void OnEnable()
     {
         robotPreview.transform.rotation = Quaternion.Euler(-45,-180,0);
-        money = 1000;
+        money = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>().Crypta;
         moneyText.text = "" + money;
         FirstInit();
     }
-
+    
     void FirstInit()
     {
         Skin skin = new Skin();
         for (int i = 0; i < skins.Capacity; i++)
         {
             skin = skins[i];
-            if (i == 0)
-            {
-                skin.status = 3;
-            }
-            else
-            {
+            
+            if (skin.status != 2 && skin.status != 3)
                 if (money >= skin.price)
                 {
                     skin.status = 1;
@@ -57,9 +55,9 @@ public class SkinManager : MonoBehaviour
                     skin.status = 0;
                 }
 
-            }
+
             skins[i] = skin;
-            skins[i].priceText.text=""+skins[i].price;
+            skins[i].priceText.text = "" + skins[i].price;
             RefreshStatus(i);
             if (skins[i].status == 3)
             {
@@ -105,6 +103,23 @@ public class SkinManager : MonoBehaviour
     {
         TestTranferInit(skins[id].price);
         EquipInit(id);
+        
+        for (int i = 0; i < skins.Capacity; i++)
+        {
+            Skin skin = new Skin();
+            skin = skins[i];
+            if(skin.status == 1)
+            {
+                if (money < skin.price)
+                {
+                    skin.status = 0;
+                }
+
+                skins[i] = skin;
+            }
+            RefreshStatus(i);
+        }
+            
     }
 
     void EquipInit(int id)
@@ -133,19 +148,20 @@ public class SkinManager : MonoBehaviour
     // from another script TransferMoney()
     void TestTranferInit(int amount)
     {
-        money = money + amount;
+        money = money - amount;
+        GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>().Crypta = money;
         moneyText.text = "" + money;
     }
 
-    int lastID;
     public void TapOnResultButton()
     {
         switch (skins[lastID].status)
         {
             case 1:
-                {
+            {
+                if (money >= skins[lastID].price)
                     BuyInit(lastID);
-                }
+            }
                 break;
             case 2:
                 {
@@ -179,5 +195,6 @@ public class SkinManager : MonoBehaviour
         }
         lastID = skinID;
         robotSkin.material.mainTexture = textures[skinID];
+        playerSkin.material.mainTexture = textures[skinID];
     }
 }

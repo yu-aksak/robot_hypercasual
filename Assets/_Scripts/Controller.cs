@@ -28,10 +28,13 @@ public class Controller : MonoBehaviour
         joystick.Vertical = 0;
     }
 
-    private void OnDisable()
+    private void OnBecameInvisible()
     {
-        antena.SetBool("status", false);
-        playersModel.SetBool("isMove", false);
+        if (camera)
+        {
+            camera.transform.position = new Vector3(0.14f, 15, -13.38f);
+            camera.orthographicSize = 20;
+        }
     }
 
     void FixedUpdate()
